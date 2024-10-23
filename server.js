@@ -1,52 +1,23 @@
-const express = require("express");
+const express = require('express');
 const cors = require("cors");
+const clienteRoutes = require('./routes/clienteRoutes');
+const telefoneRoutes = require('./routes/telefoneRoutes');
+const quartoRoutes = require('./routes/quartosRoutes');
+const reservaRoutes = require('./routes/reservasRoutes');
+const estacionamentoRoutes = require('./routes/estacionamentoRoutes');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-try {
-    const clienteRoutes = require('./routes/clienteRoutes'); 
-  console.log("clienteRoutes carregado");
-  app.use("/clientes", clientesRoutes);
-} catch (e) {
-  console.error("Erro ao carregar clienteRoutes:", e);
-}
-
-try {
-  const telefoneRoutes = require('./routes/telefoneRoutes');
-  console.log("telefoneRoutes carregado");
-  app.use("/telefones", telefoneRoutes);
-} catch (e) {
-  console.error("Erro ao carregar telefoneRoutes:", e);
-}
-
-try {
-  const quartoRoutes = require('./routes/quartoRoutes');
-  console.log("quartoRoutes carregado");
-  app.use("/quartos", quartoRoutes);
-} catch (e) {
-  console.error("Erro ao carregar quartoRoutes:", e);
-}
-
-try {
-  const reservaRoutes = require('./routes/reservaRoutes');
-  console.log("reservaRoutes carregado");
-  app.use("/reservas", reservaRoutes);
-} catch (e) {
-  console.error("Erro ao carregar reservaRoutes:", e);
-}
-
-try {
-  const estacionamentoRoutes = require('./routes/estacionamentoRoutes');
-  console.log("estacionamentoRoutes carregado");
-  app.use("/estacionamentos", estacionamentoRoutes);
-} catch (e) {
-  console.error("Erro ao carregar estacionamentoRoutes:", e);
-}
-
 app.get("/", (req, res) => res.send("Back-end respondendo"));
 
+app.use("/clientes", clienteRoutes);
+app.use("/telefones", telefoneRoutes);
+app.use("/quartos", quartoRoutes);
+app.use("/reservas", reservaRoutes);
+app.use("/estacionamentos", estacionamentoRoutes);
+
 app.listen(3000, () => {
-  console.log("Servidor rodando na porta 3000");
+    console.log("Servidor rodando na porta 3000");
 });
